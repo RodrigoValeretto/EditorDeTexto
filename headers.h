@@ -7,7 +7,7 @@ typedef struct lista
 
 Tipo_Lista *crialistas();
 
-void insereentrada(Tipo_Lista *);
+void trocapalavra(Tipo_Lista *, char *);
 
 void imprimelista(Tipo_Lista *, Tipo_Lista *);
 

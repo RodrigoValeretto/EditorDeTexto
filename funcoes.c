@@ -13,13 +13,9 @@ Tipo_Lista *crialistas()
 	return Lista;
 }
 
-void insereentrada(Tipo_Lista *Lista)
+void trocapalavra(Tipo_Lista *Lista, char palavra[30])
 {
-	char *aux = (char*)calloc(30,sizeof(char));
-	
-	printf("Digite a palavra a ser guardada\n");
-	scanf("%s", aux);
-	strcpy(Lista->palavra, aux);		
+	strcpy(Lista->palavra, palavra);	
 }
 
 void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
@@ -27,7 +23,7 @@ void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
 	Lista = InicioL;
 	while(Lista != NULL)
 	{
-		printf("%s", Lista->palavra);
+		printf("%s ", Lista->palavra);
 		Lista = Lista->prox;
 	}
 }
@@ -37,12 +33,17 @@ void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)
 	Lista = InicioL;
 	FILE *fp;
 	fp = fopen("texto.txt","rt");
+	if(fp == NULL){return;}
 
 	while(!feof(fp))
 	{
 		fscanf(fp,"%s",Lista->palavra);
 
-		Lista->prox = crialistas();
-		Lista = Lista->prox;
+		if(!feof(fp))
+		{
+			Lista->prox = crialistas();
+			Lista->prox->ant = Lista;
+			Lista = Lista->prox;
+		}
 	}
 }
