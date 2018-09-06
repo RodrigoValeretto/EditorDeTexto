@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "headers.h"
+#define COMUM 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'
 
 Tipo_Lista *crialistas()
 {
@@ -23,8 +24,17 @@ void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
 	Lista = InicioL;
 	while(Lista != NULL)
 	{
-		printf("%s ", Lista->palavra);
-		Lista = Lista->prox;
+		if(Lista->prox == NULL)
+		{
+			printf("%s", Lista->palavra);
+			Lista = Lista->prox;
+		}else{
+			if(Lista->prox->palavra[0] == COMUM)
+			{
+				printf("%s ", Lista->palavra);
+				Lista = Lista->prox;
+			}
+		}
 	}
 }
 
@@ -32,7 +42,12 @@ void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)
 {
 	Lista = InicioL;
 	FILE *fp;
-	fp = fopen("texto.txt","rt");
+	char *ent = calloc(1,sizeof(char));
+
+	scanf("%s", ent);
+	strcat(ent,".ext");
+
+	fp = fopen(ent,"rt");
 	if(fp == NULL){return;}
 
 	while(!feof(fp))
