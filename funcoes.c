@@ -9,13 +9,13 @@ Tipo_Lista *crialistas()
 
 	Lista = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));
 	if(Lista == NULL){return 0;}
-	
+
 	return Lista;
 }
 
 void trocapalavra(Tipo_Lista *Lista, char palavra[30])
 {
-	strcpy(Lista->palavra, palavra);	
+	strcpy(Lista->palavra, palavra);
 }
 
 void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
@@ -98,6 +98,7 @@ Tipo_Lista * deletapalavra(Tipo_Lista *Lista)
 		return Lista;
 	}
 
+    return Lista;
 }
 
 Tipo_Lista * avancaum(Tipo_Lista *Lista)
