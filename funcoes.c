@@ -1,25 +1,45 @@
-#include <stdio.h>
+#include <stdio.h>		//Bibliotecas utilizadas
 #include <stdlib.h>
-#include <string.h>
+#include <string.h>		//Biblioteca necessária para a manipulação de strings
 #include "headers.h"
-#define COMUM 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'
 
-Tipo_Lista *crialistas()
+Tipo_Lista *crialistas()	//Função para criar Listas
 {
 	Tipo_Lista *Lista;
 
-	Lista = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));
-	if(Lista == NULL){return 0;}
+	Lista = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));	//Alocação dinamica da lista
+	if(Lista == NULL){return 0;}	//Verifica se não retornou NULL
 
-	return Lista;
+	return Lista;	//Retorna o ponteiro alocado
 }
 
-void trocapalavra(Tipo_Lista *Lista, char palavra[30])
+int encontraincomum(Tipo_Lista *Lista)
 {
-	strcpy(Lista->palavra, palavra);
+	for(int i = 0; i<30; i++)
+	{
+		if((Lista->palavra[i]>='a' && Lista->palavra[i]<='z') || (Lista->palavra[i]>='A' && Lista->palavra[i]<='Z') || (Lista->palavra[i]>='0' && Lista->palavra[i]<='9'))
+		{}else{
+			return i;
+		}
+	}
 }
 
-void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
+int verificapalavra(Tipo_Lista *Lista)	
+{
+	for(int i = 0; i<30; i++)
+	{
+		if((Lista->palavra[i]>='a' && Lista->palavra[i]<='z') || (Lista->palavra[i]>='A' && Lista->palavra[i]<='Z') || (Lista->palavra[i]>='0' && Lista->palavra[i]<='9'))
+			{return 1;}
+		else{return 0;}
+	}
+}
+
+void trocapalavra(Tipo_Lista *Lista, char palavra[30])	//Função que troca uma palavra por outra
+{
+	strcpy(Lista->palavra, palavra);	//Coloca a palavra digitada pelo usuario no lugar da que estava na lista
+}
+
+void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)	//Função responsável por imprimir o conteudo da lista
 {
 	Lista = InicioL;
 	while(Lista != NULL)
@@ -29,16 +49,19 @@ void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)
 			printf("%s", Lista->palavra);
 			Lista = Lista->prox;
 		}else{
-			if(Lista->prox->palavra[0] == COMUM)
+			if(verificapalavra(Lista->prox))
 			{
 				printf("%s ", Lista->palavra);
+				Lista = Lista->prox;
+			}else{
+				printf("%s", Lista->palavra);
 				Lista = Lista->prox;
 			}
 		}
 	}
 }
 
-void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)
+void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)	//Função que le o arquivo inicial
 {
 	Lista = InicioL;
 	FILE *fp;
@@ -53,8 +76,13 @@ void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)
 	while(!feof(fp))
 	{
 		fscanf(fp,"%s",Lista->palavra);
-
-		if(!feof(fp))
+		if(verificapalavra(Lista))
+		{
+			int i = buscaincomum(Lista);
+			
+		}
+	
+		if(!feof(fp) && Lista->prox!=NULL)
 		{
 			Lista->prox = crialistas();
 			Lista->prox->ant = Lista;
@@ -63,7 +91,7 @@ void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)
 	}
 }
 
-void buscapalavra(Tipo_Lista *Lista, char palavra[30])
+void buscapalavra(Tipo_Lista *Lista, char palavra[30])	//Função que busca a proxima palavra apos o cursor
 {
 	while(Lista != NULL)
 	{
@@ -85,7 +113,7 @@ Tipo_Lista * deletapalavra(Tipo_Lista *Lista)
 	{
 		Lista->prox->ant = Lista->ant;
 		Lista->ant->prox = Lista->prox;
-		Lista = Lista->ant;
+		Lista = Lista->prox;
 		free(Aux);
 		return Lista;
 	}

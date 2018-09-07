@@ -1,11 +1,15 @@
-typedef struct lista
+typedef struct lista 	//Estrutura utilizada em todo o programa (Lista duplamente encadeada)
 {
 	char palavra[30];
 	struct lista *prox;
 	struct lista *ant;
 }Tipo_Lista;
-
+//Declaração de todas as funções e as variaveis utilizadas nas mesmas do programa
 Tipo_Lista *crialistas();
+
+int encontraincomum(Tipo_Lista *);
+
+int verificapalavra(Tipo_Lista *);
 
 void trocapalavra(Tipo_Lista *, char *);
 
