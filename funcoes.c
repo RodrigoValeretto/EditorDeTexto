@@ -13,6 +13,29 @@ Tipo_Lista *crialistas()	//Função para criar Listas
 	return Lista;	//Retorna o ponteiro alocado
 }
 
+char * recebepalavra()
+{
+	int cont = 0;
+	char *palavra = (char *)calloc(30,sizeof(char));
+	char *inicio = palavra;
+	for(int i=0; i<30; i++)
+	{
+		scanf("%c", &palavra[i]);
+		if(*inicio == ' ' || *inicio == '\0')
+		{inicio++;}
+		
+		if(palavra[i] == '\n')
+			{
+				if(cont >= 2){palavra[i] = '\0';}
+				break;
+			}
+
+		cont++;
+	}
+
+	return inicio;
+}
+
 int encontraincomum(Tipo_Lista *Lista)
 {
 	for(int i = 0; i<30; i++)
@@ -49,7 +72,7 @@ void imprimelista(Tipo_Lista *Lista, Tipo_Lista *InicioL)	//Função responsáve
 			printf("%s", Lista->palavra);
 			Lista = Lista->prox;
 		}else{
-			if(verificapalavra(Lista->prox))
+			if(verificapalavra(Lista->prox) && Lista->palavra[0] != '\n')
 			{
 				printf("%s ", Lista->palavra);
 				Lista = Lista->prox;
@@ -78,11 +101,10 @@ void learquivo(Tipo_Lista *Lista,Tipo_Lista *InicioL)	//Função que le o arquiv
 		fscanf(fp,"%s",Lista->palavra);
 		if(verificapalavra(Lista))
 		{
-			int i = buscaincomum(Lista);
-			
+			int i = encontraincomum(Lista);
 		}
 	
-		if(!feof(fp) && Lista->prox!=NULL)
+		if(!feof(fp) && Lista->prox==NULL)
 		{
 			Lista->prox = crialistas();
 			Lista->prox->ant = Lista;

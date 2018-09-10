@@ -7,6 +7,8 @@ typedef struct lista 	//Estrutura utilizada em todo o programa (Lista duplamente
 //Declaração de todas as funções e as variaveis utilizadas nas mesmas do programa
 Tipo_Lista *crialistas();
 
+char * recebepalavra();
+
 int encontraincomum(Tipo_Lista *);
 
 int verificapalavra(Tipo_Lista *);

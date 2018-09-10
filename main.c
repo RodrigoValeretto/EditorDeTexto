@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <stdio.h>			//Bibliotecas utilizadas
 #include <stdlib.h>
-#include <string.h>
+#include <string.h>			//Biblioteca necessaria para a manipulação de strings
 #include "headers.h"
 
 int main()
@@ -9,6 +9,7 @@ int main()
 	Tipo_Lista *Lista;			//Declaração de variáveis
 	Tipo_Lista *InicioL;
 	int num = 0;
+	int i = 0;
 	char ent;
 	char palavra[30];
 
@@ -24,12 +25,12 @@ int main()
 		switch(ent)				//Função switch que permite realizar uma ação de acordo com o comando do usuario
 		{
 			case 'r':				//Caso o usuario digite r, ele pode trocar a palavra que a lista está apontando
-			scanf("%s", palavra);
+			strcpy(palavra,recebepalavra());
 			trocapalavra(Lista, palavra);	//Função de trocar palavra
 			break;
 
 			case 'f':				//Caso o usuario digite f, ele pode buscar a proxima palavra após o local que a lista aponta
-			scanf("%s", palavra);
+			strcpy(palavra,recebepalavra());
 			buscapalavra(Lista, palavra);	//Função de buscar a palavra
 			break;
 
