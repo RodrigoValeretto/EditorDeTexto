@@ -13,6 +13,8 @@ int encontraincomum(Tipo_Lista *);
 
 int verificapalavra(Tipo_Lista *);
 
+int verificachar(char);
+
 void trocapalavra(Tipo_Lista *, char *);
 
 void imprimelista(Tipo_Lista *, Tipo_Lista *);
