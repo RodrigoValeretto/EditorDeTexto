@@ -66,6 +66,31 @@ int verificachar(char letra)
 	else{return 0;}
 }
 
+void insereprox(Tipo_Lista *Lista, char *palavra)
+{
+	Tipo_Lista *Elem = crialistas();
+	
+	strcpy(Elem->palavra, palavra);
+	Elem->ant = Lista;
+	Elem->prox = Lista->prox;
+	Lista->prox = Elem;
+}
+
+Tipo_Lista * insereant(Tipo_Lista *Lista, Tipo_Lista *InicioL, char *palavra)
+{
+	Tipo_Lista *Elem = crialistas();
+
+	if(Lista == InicioL)
+	{InicioL = Elem;}
+
+	strcpy(Elem->palavra, palavra);
+	Elem->prox = Lista;
+	Elem->ant = Lista->ant;
+	Lista->ant = Elem;
+
+	return InicioL;
+}
+
 void trocapalavra(Tipo_Lista *Lista, char palavra[30])	//Função que troca uma palavra por outra
 {
 	strcpy(Lista->palavra, palavra);	//Coloca a palavra digitada pelo usuario no lugar da que estava na lista

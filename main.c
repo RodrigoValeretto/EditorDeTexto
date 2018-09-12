@@ -24,6 +24,16 @@ int main()
 
 		switch(ent)				//Função switch que permite realizar uma ação de acordo com o comando do usuario
 		{
+			case 'i':
+			strcpy(palavra,recebepalavra());
+			insereprox(Lista, palavra);
+			break;
+
+			case 'a':
+			strcpy(palavra,recebepalavra());
+			InicioL = insereant(Lista, InicioL, palavra);
+			break;
+
 			case 'r':				//Caso o usuario digite r, ele pode trocar a palavra que a lista está apontando
 			strcpy(palavra,recebepalavra());
 			trocapalavra(Lista, palavra);	//Função de trocar palavra

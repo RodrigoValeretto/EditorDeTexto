@@ -15,6 +15,10 @@ int verificapalavra(Tipo_Lista *);
 
 int verificachar(char);
 
+void insereprox(Tipo_Lista *, char *);
+
+Tipo_Lista * insereant(Tipo_Lista *, Tipo_Lista *, char *);
+
 void trocapalavra(Tipo_Lista *, char *);
 
 void imprimelista(Tipo_Lista *, Tipo_Lista *);
