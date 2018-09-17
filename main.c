@@ -3,13 +3,12 @@
 #include <string.h>			//Biblioteca necessaria para a manipulação de strings
 #include "headers.h"
 
-int main()
+int main()	//Função principal do programa
 {
-	printf("Editor de Textos em C\n");
+	//printf("Editor de Textos em C\n");
 	Tipo_Lista *Lista;			//Declaração de variáveis
 	Tipo_Lista *InicioL;
 	int num = 0;
-	int i = 0;
 	char ent;
 	char palavra[30];
 
@@ -24,24 +23,25 @@ int main()
 
 		switch(ent)				//Função switch que permite realizar uma ação de acordo com o comando do usuario
 		{
-			case 'i':
-			strcpy(palavra,recebepalavra());
-			insereprox(Lista, palavra);
+			case 'i':			//Caso o usuário digite i, ele insere uma nova palavra em um novo nodo antes do cursor
+			strcpy(palavra,recebepalavra());	//Recebe a palavra que será inserida
+			InicioL = insereant(Lista, InicioL, palavra);	//Função que insere antes
 			break;
 
-			case 'a':
-			strcpy(palavra,recebepalavra());
-			InicioL = insereant(Lista, InicioL, palavra);
+			case 'a':			//Caso o usuário digite a, ele insere uma nova palavra em um novo nodo depois do cursor
+			strcpy(palavra,recebepalavra());	//Recebe a palavra que será inserida
+			insereprox(Lista, palavra);	//Função que insere depois
 			break;
+
 
 			case 'r':				//Caso o usuario digite r, ele pode trocar a palavra que a lista está apontando
-			strcpy(palavra,recebepalavra());
+			strcpy(palavra,recebepalavra());	//Recebe a palavra que será inserida
 			trocapalavra(Lista, palavra);	//Função de trocar palavra
 			break;
 
 			case 'f':				//Caso o usuario digite f, ele pode buscar a proxima palavra após o local que a lista aponta
-			strcpy(palavra,recebepalavra());
-			buscapalavra(Lista, palavra);	//Função de buscar a palavra
+			strcpy(palavra,recebepalavra());	//Recebe a palavra que será inserida
+			buscapalavra(Lista, palavra, InicioL);	//Função de buscar a palavra
 			break;
 
 			case 'd':				//Caso o usuario digite d, ele pode deletar a palavra que a lista aponta
@@ -77,10 +77,12 @@ int main()
 
 			case 's':				//Caso o usuario digite s, a função imprime todo o texto contido na memória e finaliza o programa;
 			imprimelista(Lista, InicioL);	//Função que imprime o conteudo da lista
+			InicioL = liberamemoria(Lista, InicioL);    //Função que libera memória alocada durante o programa
 			return 0;						//Finaliza o programa
 
 		}
 	}
 
-	return 0;
+	InicioL = liberamemoria(Lista, InicioL); //Função que libera memória alocada durante o programa
+	return 0;	//Finaliza o programa retornando 0
 }
